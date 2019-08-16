@@ -5,17 +5,30 @@
   </div>
 </template>
 
-<script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+<script scoped>
+  const HelloWorld = () => import('@/components/HelloWorld.vue');
 
-export default {
-  name: 'home',
-  components: {
-    HelloWorld
-  },
-  created () {
-    console.log('Home');
+  export default {
+    name: 'Home',
+
+    components: {
+      HelloWorld
+    },
+
+    created () {
+      this.getUserInfo();
+    },
+
+    methods: {
+      getUserInfo () {
+        this.$Http.get('http://localhost:8091/api/user')
+          .then(res => {
+            console.log(res);
+          })
+          .catch(res => {
+            console.log('error: ', res);
+          })
+      }
+    }
   }
-}
 </script>
