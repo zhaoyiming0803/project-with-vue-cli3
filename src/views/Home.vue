@@ -16,7 +16,7 @@
     },
 
     created () {
-      this.getUserInfo();
+      // this.getUserInfo();
     },
 
     methods: {
