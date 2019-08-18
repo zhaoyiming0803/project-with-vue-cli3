@@ -17,7 +17,8 @@ const chainWebpack = config => {
   config.plugins.delete('preload');
 
   config.plugin('inline-source')
-    .use(require('html-webpack-inline-source-plugin'));
+    .use(require('html-webpack-inline-source-plugin'))
+    .after('html');
 
   config.plugin('script-ext')
     .use(require('script-ext-html-webpack-plugin'), [{
@@ -25,8 +26,7 @@ const chainWebpack = config => {
     }])
     .after('html');
 
-  config
-    .plugin('html')
+  config.plugin('html')
     .tap(args => {
       args[0].inlineSource = '.(app|chunk-vendors).*.(css|js)';
       args[0].minify = undefined;
@@ -44,4 +44,3 @@ module.exports = {
   configureWebpack: config => configure[process.env.NODE_ENV](config),
   chainWebpack: chainWebpack
 };
-
