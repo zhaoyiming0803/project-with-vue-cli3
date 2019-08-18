@@ -14,6 +14,10 @@
       return {}
     },
 
+    created () {
+      console.log(this.$Event);
+    },
+
     methods: {
       toHome () {
         this.$router.push({
