@@ -14,11 +14,17 @@ const configure = {
   production: config => webpackProdConfig(config)
 }
 
+// doc: https://github.com/neutrinojs/webpack-chain
 const chainWebpack = config => {
-  config.resolve.alias.set('public', resolve('public'));
+  config.resolve.alias
+    .set('public', resolve('public'));
+  config.resolve.extensions
+    .add('.less')
+    .add('.css');
 
-  config.plugins.delete('prefetch');
-  config.plugins.delete('preload');
+  config.plugins
+    .delete('prefetch')
+    .delete('preload');
 
   config.plugin('inline-source')
     .use(require('html-webpack-inline-source-plugin'))
