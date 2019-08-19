@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import Http from '@/libs/http'
-import event from '../public/js/event'
+import event from 'public/js/event'
 
 Vue.config.productionTip = false
 

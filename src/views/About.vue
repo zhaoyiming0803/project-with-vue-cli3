@@ -5,6 +5,9 @@
 </template>
 
 <script scoped>
+  import cookie from 'public/js/cookie'
+  console.log(cookie);
+  
   export default {
     data () {
       return {

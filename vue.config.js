@@ -4,6 +4,8 @@
  * @since  2019/08/16
  */
 
+const path = require('path');
+const resolve = dir => path.resolve(__dirname, './', dir);
 const webpackDevConfig = require('./build/webpack.dev.config');
 const webpackProdConfig = require('./build/webpack.prod.config');
 
@@ -13,6 +15,8 @@ const configure = {
 }
 
 const chainWebpack = config => {
+  config.resolve.alias.set('public', resolve('public'));
+
   config.plugins.delete('prefetch');
   config.plugins.delete('preload');
 
