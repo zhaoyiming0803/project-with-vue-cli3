@@ -33,7 +33,7 @@ const chainWebpack = config => {
   config.plugin('html')
     .tap(args => {
       args[0].inlineSource = '.(app|chunk-vendors).*.(css|js)';
-      args[0].minify = undefined;
+      // args[0].minify = undefined;
       args[0].var = {
         isProd: process.env.npm_lifecycle_event === 'build'
       }
