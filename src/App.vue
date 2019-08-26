@@ -1,23 +1,17 @@
 <template>
   <div id="app">
     <div id="nav">
-      <van-button type="info" @click="toHome">Home</van-button>
-      <van-button type="info" @click="toAbout">About</van-button>
+      <button @click="toHome">Home</button>
+      <button @click="toAbout">About</button>
     </div>
     <router-view/>
   </div>
 </template>
 
 <script scoped>
-  import { Button } from 'vant';
-
   export default {
     data () {
       return {}
-    },
-
-    components: {
-      [Button.name]: Button
     },
 
     created () {

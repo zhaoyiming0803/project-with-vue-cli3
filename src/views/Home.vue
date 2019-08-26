@@ -3,11 +3,13 @@
     <img alt="Vue logo" src="../assets/logo.png">
     <HelloWorld msg="Welcome to Your Vue.js App"/>
     <product-list :productList="productList"></product-list>
+    <van-slider v-model="value" @change="onChange" />
   </div>
   <skeleton v-else></skeleton>
 </template>
 
 <script scoped>
+  import { Slider } from 'vant'
   import HelloWorld from '@/components/HelloWorld.vue';
   import Skeleton from '@/components/Skeleton.vue';
   const ProductList = () => import('@/components/List.vue');
@@ -18,11 +20,13 @@
     data () {
       return {
         isShowPage: false,
-        productList: []
+        productList: [],
+        value: 10
       }
     },
 
     components: {
+      [Slider.name]: Slider,
       HelloWorld,
       Skeleton,
       ProductList
@@ -59,6 +63,10 @@
           .catch(res => {
             console.log('error: ', res);
           })
+      },
+
+      onChange (value) {
+        console.log(value);
       }
     }
   }
