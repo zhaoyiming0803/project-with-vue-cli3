@@ -4,6 +4,8 @@
  * @since  2019/08/16
  */
 
+const path = require('path');
+const resolve = dir => path.resolve(__dirname, './', dir);
 const webpackDevConfig = require('./build/webpack.dev.config');
 const webpackProdConfig = require('./build/webpack.prod.config');
 
@@ -12,9 +14,17 @@ const configure = {
   production: config => webpackProdConfig(config)
 }
 
+// doc: https://github.com/neutrinojs/webpack-chain
 const chainWebpack = config => {
-  config.plugins.delete('prefetch');
-  config.plugins.delete('preload');
+  config.resolve.alias
+    .set('public', resolve('public'));
+  config.resolve.extensions
+    .add('.less')
+    .add('.css');
+
+  config.plugins
+    .delete('prefetch')
+    .delete('preload');
 
   config.plugin('inline-source')
     .use(require('html-webpack-inline-source-plugin'))
