@@ -1,39 +1,45 @@
 <template>
-  <div>
+  <div class="customer-dialot-container">
+    <div>
+      <slot></slot>
+    </div>
+
     <div>
       <slot name="header"></slot>
     </div>
-    <slot name="items">
-      <div v-for="(user, index) in items" :key="index">
-        <span>{{user.id}}</span>
-        <span>{{user.name}}</span>
-      </div>
-    </slot>
+
+    <div v-for="(item, index) in items" :key="index">
+      <slot name="items" :item="item">
+        <span>{{item.id}}</span>
+        <span>{{item.name}}</span>
+      </slot>
+    </div>
+
     <div>
       <slot name="footer"></slot>
     </div>
   </div>
 </template>
 
-<script>
-export default {
-  props: {
-    items: {
-      type: Array,
-      default: () => []
+<script scoped>
+  export default {
+    props: {
+      items: {
+        type: Array,
+        default: () => []
+      }
+    },
+
+    data () {
+      return {
+        
+      }
+    },
+
+    created () {
+      console.log(this.$slots);
     }
-  },
-
-  data () {
-    return {
-
-    }
-  },
-
-  mounted () {
-    
   }
-}
 </script>
 
 <style lang="less" scoped>

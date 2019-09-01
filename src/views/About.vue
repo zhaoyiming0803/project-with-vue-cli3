@@ -1,16 +1,32 @@
 <template>
   <div class="about">
     <h1>This is an about page</h1>
-    <van-switch v-model="checked"></van-switch>
+
+    <div style="margin-bottom: 10px; font-size: 16px;">
+      <span>是否自定义插槽内容</span>
+      <van-switch v-model="customerSlotContent"></van-switch>
+    </div>
+
     <customer-dialog :items="items">
+      <template v-slot:default>
+        <div>默认插槽</div>
+      </template>
+      
       <template v-slot:header>
-        <div>header</div>
+        <div>具名插槽: header</div>
       </template>
-      <template v-slot:items="slotProps">
-        <div>123</div>
+      
+      <template v-if="customerSlotContent" v-slot:items="props">
+        <div>
+          <span>id:{{props.item.id}} </span>
+          <span>name: {{props.item.name}} </span>
+        </div>
       </template>
+
+      <template v-else v-slot:items></template>
+
       <template v-slot:footer>
-        <div>footer</div>
+        <div>具名插槽: footer</div>
       </template>
     </customer-dialog>
   </div>
@@ -23,7 +39,7 @@
   export default {
     data () {
       return {
-        checked: false,
+        customerSlotContent: false,
         items: [
           {id: 1, name: 'zhangsan'},
           {id: 2, name: 'lisi'},
